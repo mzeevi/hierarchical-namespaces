@@ -30,6 +30,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/event"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
@@ -74,8 +75,6 @@ type Reconciler struct {
 	// https://book-v1.book.kubebuilder.io/beyond_basics/controller_watches.html) that is used to
 	// enqueue additional namespaces that need updating.
 	affected chan event.GenericEvent
-
-	ReadOnly bool
 }
 
 type AnchorReconcilerType interface {
@@ -133,9 +132,9 @@ func (r *Reconciler) handleUnmanaged(ctx context.Context, log logr.Logger, nm st
 	// Remove the finalizers if there are any. Note that while getSingleton can return an invalid
 	// object (i.e. one without a name or namespace, if there's no singleton on the server), it can
 	// never do that if there are finalizers or children so this is safe to write back.
-	if len(inst.ObjectMeta.Finalizers) > 0 || len(inst.Status.Children) > 0 {
+	if controllerutil.ContainsFinalizer(inst, api.FinalizerHasSubnamespace) || len(inst.Status.Children) > 0 {
 		log.Info("Removing finalizers and children on unmanaged singleton")
-		inst.ObjectMeta.Finalizers = nil
+		controllerutil.RemoveFinalizer(inst, api.FinalizerHasSubnamespace)
 		inst.Status.Children = nil
 		stats.WriteHierConfig()
 		if err := r.Update(ctx, inst); err != nil {
@@ -241,27 +240,27 @@ func (r *Reconciler) addIncludedNamespaceLabel(log logr.Logger, nsInst *corev1.N
 // .spec.allowCascadingDeletion field, so if we allowed this object to be deleted before all
 // descendants have been deleted, we would lose the knowledge that cascading deletion is enabled.
 func (r *Reconciler) updateFinalizers(log logr.Logger, inst *api.HierarchyConfiguration, nsInst *corev1.Namespace, anms []string) {
-	// No-one should put a finalizer on a hierarchy config except us. See
-	// https://github.com/kubernetes-sigs/hierarchical-namespaces/issues/623 as we try to enforce that.
 	switch {
 	case len(anms) == 0:
 		// There are no subnamespaces in this namespace. The HC instance can be safely deleted anytime.
-		if len(inst.ObjectMeta.Finalizers) > 0 {
+		if controllerutil.ContainsFinalizer(inst, api.FinalizerHasSubnamespace) {
 			log.V(1).Info("Removing finalizers since there are no longer any anchors in the namespace.")
+			controllerutil.RemoveFinalizer(inst, api.FinalizerHasSubnamespace)
 		}
-		inst.ObjectMeta.Finalizers = nil
 	case !inst.DeletionTimestamp.IsZero() && nsInst.DeletionTimestamp.IsZero():
 		// If the HC instance is being deleted but not the namespace (which means
 		// it's not a cascading delete), remove the finalizers to let it go through.
 		// This is the only case the finalizers can be removed even when the
 		// namespace has subnamespaces. (A default HC will be recreated later.)
-		log.Info("Removing finalizers to allow a single deletion of the singleton (not involved in a cascading deletion).")
-		inst.ObjectMeta.Finalizers = nil
-	default:
-		if len(inst.ObjectMeta.Finalizers) == 0 {
-			log.Info("Adding finalizers since there's at least one anchor in the namespace.")
+		if controllerutil.ContainsFinalizer(inst, api.FinalizerHasSubnamespace) {
+			log.Info("Removing finalizers to allow a single deletion of the singleton (not involved in a cascading deletion).")
+			controllerutil.RemoveFinalizer(inst, api.FinalizerHasSubnamespace)
 		}
-		inst.ObjectMeta.Finalizers = []string{api.FinalizerHasSubnamespace}
+	default:
+		if !controllerutil.ContainsFinalizer(inst, api.FinalizerHasSubnamespace) {
+			log.Info("Adding finalizers since there's at least one anchor in the namespace.")
+			controllerutil.AddFinalizer(inst, api.FinalizerHasSubnamespace)
+		}
 	}
 }
 
@@ -703,7 +702,7 @@ func (r *Reconciler) writeInstances(ctx context.Context, log logr.Logger, newHC 
 func (r *Reconciler) writeHierarchy(ctx context.Context, log logr.Logger, inst *api.HierarchyConfiguration, isDeletingNS bool) error {
 	// The inst's name will be blank if it wasn't on the apiserver and we didn't want to make any
 	// changes to it (e.g. no children, conditions, etc).
-	if r.ReadOnly || inst.GetName() == "" {
+	if inst.GetName() == "" {
 		return nil
 	}
 	exists := !inst.CreationTimestamp.IsZero()
@@ -731,10 +730,6 @@ func (r *Reconciler) writeHierarchy(ctx context.Context, log logr.Logger, inst *
 }
 
 func (r *Reconciler) writeNamespace(ctx context.Context, log logr.Logger, inst *corev1.Namespace) error {
-	if r.ReadOnly {
-		return nil
-	}
-
 	// NB: HCR can't create namespaces, that's only in anchor reconciler
 	stats.WriteNamespace()
 	log.V(1).Info("Updating namespace on apiserver")

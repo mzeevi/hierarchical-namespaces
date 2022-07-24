@@ -15,6 +15,27 @@ import (
 	api "sigs.k8s.io/hierarchical-namespaces/api/v1alpha2"
 )
 
+func SelectorExists(inst *unstructured.Unstructured, nsLabels labels.Set) (bool, error) {
+	if sel, err := GetSelector(inst); err != nil {
+		return false, err
+	} else if sel != nil && !sel.Empty() {
+		return true, nil
+	}
+	if sel, err := GetTreeSelector(inst); err != nil {
+		return false, err
+	} else if sel != nil && !sel.Empty() {
+		return true, nil
+	}
+	if none, err := GetNoneSelector(inst); err != nil || none {
+		return true, err
+	}
+	if all, err := GetAllSelector(inst); err != nil || all {
+		return true, err
+	}
+
+	return false, nil
+}
+
 func ShouldPropagate(inst *unstructured.Unstructured, nsLabels labels.Set) (bool, error) {
 	if sel, err := GetSelector(inst); err != nil {
 		return false, err
@@ -28,6 +49,9 @@ func ShouldPropagate(inst *unstructured.Unstructured, nsLabels labels.Set) (bool
 	}
 	if none, err := GetNoneSelector(inst); err != nil || none {
 		return false, err
+	}
+	if all, err := GetAllSelector(inst); err != nil || all {
+		return true, err
 	}
 	if excluded, err := isExcluded(inst); excluded {
 		return false, err
@@ -48,6 +72,11 @@ func GetTreeSelectorAnnotation(inst *unstructured.Unstructured) string {
 func GetNoneSelectorAnnotation(inst *unstructured.Unstructured) string {
 	annot := inst.GetAnnotations()
 	return annot[api.AnnotationNoneSelector]
+}
+
+func GetAllSelectorAnnotation(inst *unstructured.Unstructured) string {
+	annot := inst.GetAnnotations()
+	return annot[api.AnnotationAllSelector]
 }
 
 // GetTreeSelector is similar to a regular selector, except that it adds the LabelTreeDepthSuffix to every string
@@ -156,6 +185,27 @@ func GetNoneSelector(inst *unstructured.Unstructured) (bool, error) {
 
 	}
 	return noneSelector, nil
+}
+
+// GetAllSelector returns true indicates that user do wants this object to be propagated
+func GetAllSelector(inst *unstructured.Unstructured) (bool, error) {
+	allSelectorStr := GetAllSelectorAnnotation(inst)
+	// Empty string is treated as 'false'. In other selector cases, the empty string is auto converted to
+	// a selector that matches everything.
+	if allSelectorStr == "" {
+		return false, nil
+	}
+	allSelector, err := strconv.ParseBool(allSelectorStr)
+	if err != nil {
+		// Returning false here in accordance to the Go standard
+		return false,
+			fmt.Errorf("invalid %s value: %w",
+				api.AnnotationAllSelector,
+				err,
+			)
+
+	}
+	return allSelector, nil
 }
 
 // cmExclusionsByName are known (istio and kube-root) CA configmap which are excluded from propagation

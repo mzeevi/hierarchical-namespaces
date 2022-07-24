@@ -48,9 +48,6 @@ type Reconciler struct {
 	// that is used to enqueue the singleton to trigger reconciliation.
 	trigger chan event.GenericEvent
 
-	// ReadOnly disables writebacks
-	ReadOnly bool
-
 	// RefreshDuration is the maximum amount of time between refreshes
 	RefreshDuration time.Duration
 
@@ -210,10 +207,6 @@ func (r *Reconciler) validateSingleton(inst *api.HNCConfiguration) {
 // We will write the singleton to apiserver even it is not changed because we assume this
 // reconciler is called very infrequently and is not performance critical.
 func (r *Reconciler) writeSingleton(ctx context.Context, inst *api.HNCConfiguration) error {
-	if r.ReadOnly {
-		return nil
-	}
-
 	if inst.CreationTimestamp.IsZero() {
 		// No point creating it if the CRD's being deleted
 		if isDeleted, err := crd.IsDeletingCRD(ctx, api.HNCConfigSingletons); isDeleted || err != nil {
@@ -368,7 +361,7 @@ func (r *Reconciler) writeCondition(inst *api.HNCConfiguration, tp, reason, msg 
 }
 
 // setTypeStatuses adds Status.Resources for types configured in the spec. Only the status of types
-// in `Propagate` and `Remove` modes will be recorded. The Status.Resources is sorted in
+// in `Propagate`, `Remove` and `Allow` modes will be recorded. The Status.Resources is sorted in
 // alphabetical order based on Group and Resource.
 func (r *Reconciler) setTypeStatuses(inst *api.HNCConfiguration) {
 	// We lock the forest here so that other reconcilers cannot modify the
@@ -401,7 +394,7 @@ func (r *Reconciler) setTypeStatuses(inst *api.HNCConfiguration) {
 		}
 
 		// Only add NumSourceObjects if we are propagating objects of this type.
-		if ts.GetMode() == api.Propagate {
+		if ts.GetMode() == api.Propagate || ts.GetMode() == api.Allow {
 			numSrc := 0
 			nms := r.Forest.GetNamespaceNames()
 			for _, nm := range nms {

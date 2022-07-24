@@ -165,7 +165,7 @@ func (r *Reconciler) GetMode() api.SynchronizationMode {
 // treated as api.Ignore.
 func GetValidateMode(mode api.SynchronizationMode, log logr.Logger) api.SynchronizationMode {
 	switch mode {
-	case api.Propagate, api.Ignore, api.Remove:
+	case api.Propagate, api.Ignore, api.Remove, api.Allow:
 		return mode
 	case "":
 		log.Info("Sync mode is unset; using default 'Propagate'")
@@ -388,11 +388,13 @@ func (r *Reconciler) shouldSyncAsPropagated(log logr.Logger, inst *unstructured.
 	}
 
 	// If there's a conflicting source in the ancestors (excluding itself) and the
-	// the type has 'Propagate' mode, the object will be overwritten.
+	// the type has 'Propagate' mode or 'Allow' mode, the object will be overwritten.
 	mode := r.Forest.GetTypeSyncer(r.GVK).GetMode()
-	if mode == api.Propagate && srcInst != nil {
-		log.Info("Conflicting object found in ancestors namespace; will overwrite this object", "conflictingAncestor", srcInst.GetNamespace())
-		return true, srcInst
+	if mode == api.Propagate || mode == api.Allow {
+		if srcInst != nil {
+			log.Info("Conflicting object found in ancestors namespace; will overwrite this object", "conflictingAncestor", srcInst.GetNamespace())
+			return true, srcInst
+		}
 	}
 
 	return false, nil
@@ -463,7 +465,7 @@ func (r *Reconciler) syncPropagated(inst, srcInst *unstructured.Unstructured) (s
 func (r *Reconciler) syncSource(log logr.Logger, src *unstructured.Unstructured) {
 	// Update or create a copy of the source object in the forest. We now store
 	// all the source objects in the forests no matter if the mode is 'Propagate'
-	// or not, because HNCConfig webhook will also check the non-'Propagate' mode
+	// or not, because HNCConfig webhook will also check the non-'Propagate' or 'Allow' modes
 	// source objects in the forest to see if a mode change is allowed.
 	ns := r.Forest.Get(src.GetNamespace())
 
@@ -725,6 +727,16 @@ func (r *Reconciler) shouldPropagateSource(log logr.Logger, inst *unstructured.U
 	// from being handled by HNC.
 	case r.Mode == api.Remove:
 		return false
+
+	case r.Mode == api.Allow:
+		if exists, err := selectors.SelectorExists(inst, nsLabels); err != nil {
+			log.Error(err, "Cannot propagate")
+			r.EventRecorder.Event(inst, "Warning", api.EventCannotParseSelector, err.Error())
+			return false
+		} else if !exists {
+			return false
+		}
+		return true
 
 	// Object with nonempty finalizer list is not propagated
 	case hasFinalizers(inst):
