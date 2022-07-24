@@ -46,6 +46,10 @@ const (
 
 	// Remove all existing propagated copies.
 	Remove SynchronizationMode = "Remove"
+
+	// Allow allows propagation of objects from ancestors to descendants
+	// and deletes obsolete descendants only if a an annotation is set on the object
+	Allow SynchronizationMode = "Allow"
 )
 
 const (
@@ -94,7 +98,7 @@ type ResourceSpec struct {
 	// Synchronization mode of the kind. If the field is empty, it will be treated
 	// as "Propagate".
 	// +optional
-	// +kubebuilder:validation:Enum=Propagate;Ignore;Remove
+	// +kubebuilder:validation:Enum=Propagate;Ignore;Remove;Allow
 	Mode SynchronizationMode `json:"mode,omitempty"`
 }
 

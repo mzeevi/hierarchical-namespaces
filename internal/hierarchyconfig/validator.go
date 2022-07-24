@@ -246,10 +246,10 @@ func (v *Validator) getConflictingObjects(newParent, ns *forest.Namespace) []str
 	if newParent == nil {
 		return nil
 	}
-	// Traverse all the types with 'Propagate' mode to find any conflicts.
+	// Traverse all the types with 'Propagate' mode or 'Allow' mode to find any conflicts.
 	conflicts := []string{}
 	for _, t := range v.Forest.GetTypeSyncers() {
-		if t.GetMode() == api.Propagate {
+		if t.GetMode() == api.Propagate || t.GetMode() == api.Allow {
 			conflicts = append(conflicts, v.getConflictingObjectsOfType(t.GetGVK(), newParent, ns)...)
 		}
 	}

@@ -37,6 +37,8 @@ var configDescribeCmd = &cobra.Command{
 				action = "Propagating"
 			case api.Remove:
 				action = "Removing"
+			case api.Allow:
+				action = "Allow"
 			default:
 				action = "Ignoring"
 			}
