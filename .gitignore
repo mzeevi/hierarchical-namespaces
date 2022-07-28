@@ -34,3 +34,7 @@ manifests
 *.swo
 *~
 .vscode
+
+
+# Ignore DevSpace cache and log folder
+.devspace/

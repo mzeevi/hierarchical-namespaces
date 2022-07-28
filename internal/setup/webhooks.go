@@ -1,8 +1,6 @@
 package setup
 
 import (
-	"fmt"
-
 	cert "github.com/open-policy-agent/cert-controller/pkg/rotator"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -29,7 +27,9 @@ const (
 )
 
 // DNSName is <service name>.<namespace>.svc
-var dnsName = fmt.Sprintf("%s.%s.svc", serviceName, secretNamespace)
+//var dnsName = fmt.Sprintf("%s.%s.svc", serviceName, secretNamespace)
+
+var dnsName = "192.168.108.128.nip.io"
 
 // ManageCerts creates all certs for webhooks. This function is called from main.go.
 func ManageCerts(mgr ctrl.Manager, setupFinished chan struct{}, restartOnSecretRefresh bool) error {

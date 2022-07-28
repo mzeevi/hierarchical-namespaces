@@ -173,7 +173,7 @@ manifests: controller-gen
 		${KUSTOMIZE} edit add resource ../config/crd
 	${KUSTOMIZE} build manifests/ -o manifests/crds.yaml
 	@cd manifests && \
-		for variant in default-cc default-cm nowebhooks-cc ha-webhooks-cc hrq ; do \
+		for variant in default-cc default-cm nowebhooks-cc ha-webhooks-cc hrq dev-cm ; do \
 			echo "Building $${variant} manifest"; \
 			rm kustomization.yaml; \
 			touch kustomization.yaml && \
@@ -248,6 +248,14 @@ deploy-watch-ha:
 deploy-hrq: docker-push kubectl manifests
 	-kubectl -n hnc-system delete deployment --all
 	kubectl apply -f manifests/hrq.yaml
+
+deploy-dev: docker-push kubectl manifests
+	-kubectl -n hnc-system delete deployment --all
+	kubectl apply -f manifests/dev-cm.yaml
+	sleep 2
+	kubectl get secrets webhook-server-cert -n hnc-system -o jsonpath="{.data.ca\.crt}" | base64 --decode > /tmp/k8s-webhook-server/serving-certs/ca.crt
+	kubectl get secrets webhook-server-cert -n hnc-system -o jsonpath="{.data.tls\.crt}" | base64 --decode > /tmp/k8s-webhook-server/serving-certs/tls.crt
+	kubectl get secrets webhook-server-cert -n hnc-system -o jsonpath="{.data.tls\.key}" | base64 --decode > /tmp/k8s-webhook-server/serving-certs/tls.key
 
 # No need to delete the HA configuration here - everything "extra" that it
 # installs is in hnc-system, which gets deleted by the default manifest.

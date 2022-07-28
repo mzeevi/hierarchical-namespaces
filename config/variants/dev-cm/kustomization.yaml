@@ -1,0 +1,79 @@
+# Adds namespace to all resources.
+namespace: hnc-system
+
+# Value of this field is prepended to the
+# names of all resources, e.g. a deployment named
+# "wordpress" becomes "alices-wordpress".
+# Note that it should also match with the prefix (text before '-') of the namespace
+# field above.
+namePrefix: hnc-
+
+bases:
+- ../../certmanager
+- ../../crd
+- ../../manager-dev
+- ../../rbac
+- ../../webhook-dev
+
+patchesStrategicMerge:
+- webhookcainjection_patch.yaml
+
+vars:
+- name: CERTIFICATE_NAMESPACE # namespace of the certificate CR
+  objref:
+    kind: Certificate
+    group: cert-manager.io
+    version: v1
+    name: serving-cert # this name should match the one in certificate.yaml
+  fieldref:
+    fieldpath: metadata.namespace
+- name: CERTIFICATE_NAME
+  objref:
+    kind: Certificate
+    group: cert-manager.io
+    version: v1
+    name: serving-cert # this name should match the one in certificate.yaml
+- name: SERVICE_NAMESPACE # namespace of the service
+  objref:
+    kind: Service
+    version: v1
+    name: webhook-service
+  fieldref:
+    fieldpath: metadata.namespace
+- name: SERVICE_NAME
+  objref:
+    kind: Service
+    version: v1
+    name: webhook-service
+
+patches:
+- patch: |-
+    - op: replace
+      path: /webhooks/0/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/mutate-namespace
+  target:
+    group: admissionregistration.k8s.io
+    version: v1
+    kind: MutatingWebhookConfiguration
+    name: mutating-webhook-configuration
+- patch: |-
+    - op: replace
+      path: /webhooks/0/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/validate-hnc-x-k8s-io-v1alpha2-subnamespaceanchors
+    - op: replace
+      path: /webhooks/1/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/validate-hnc-x-k8s-io-v1alpha2-hierarchyconfigurations
+    - op: replace
+      path: /webhooks/2/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/validate-objects
+    - op: replace
+      path: /webhooks/3/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/validate-hnc-x-k8s-io-v1alpha2-hncconfigurations
+    - op: replace
+      path: /webhooks/4/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/validate-v1-namespace
+  target:
+    group: admissionregistration.k8s.io
+    version: v1
+    kind: ValidatingWebhookConfiguration
+    name: validating-webhook-configuration
