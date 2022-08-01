@@ -16,6 +16,7 @@ bases:
 - ../../webhook-dev
 
 patchesStrategicMerge:
+- webhook_patch.yaml
 - webhookcainjection_patch.yaml
 
 vars:
@@ -51,6 +52,9 @@ patches:
     - op: replace
       path: /webhooks/0/clientConfig/url
       value: https://192.168.108.128.nip.io:443/mutate-namespace
+    - op: add
+      path: /webhooks/0/timeoutSeconds
+      value: 30
   target:
     group: admissionregistration.k8s.io
     version: v1
@@ -72,6 +76,33 @@ patches:
     - op: replace
       path: /webhooks/4/clientConfig/url
       value: https://192.168.108.128.nip.io:443/validate-v1-namespace
+    - op: replace
+      path: /webhooks/5/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/validate-hnc-x-k8s-io-v1alpha2-hrq
+    - op: replace
+      path: /webhooks/6/clientConfig/url
+      value: https://192.168.108.128.nip.io:443/validate-hnc-x-k8s-io-v1alpha2-resourcequotasstatus
+    - op: add
+      path: /webhooks/0/timeoutSeconds
+      value: 30
+    - op: add
+      path: /webhooks/1/timeoutSeconds
+      value: 30
+    - op: add
+      path: /webhooks/2/timeoutSeconds
+      value: 30
+    - op: add
+      path: /webhooks/3/timeoutSeconds
+      value: 30
+    - op: add
+      path: /webhooks/4/timeoutSeconds
+      value: 30
+    - op: add
+      path: /webhooks/5/timeoutSeconds
+      value: 30
+    - op: add
+      path: /webhooks/6/timeoutSeconds
+      value: 30
   target:
     group: admissionregistration.k8s.io
     version: v1

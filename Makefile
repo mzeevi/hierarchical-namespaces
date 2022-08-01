@@ -253,6 +253,7 @@ deploy-dev: docker-push kubectl manifests
 	-kubectl -n hnc-system delete deployment --all
 	kubectl apply -f manifests/dev-cm.yaml
 	sleep 2
+	mkdir -p /tmp/k8s-webhook-server/serving-certs/
 	kubectl get secrets webhook-server-cert -n hnc-system -o jsonpath="{.data.ca\.crt}" | base64 --decode > /tmp/k8s-webhook-server/serving-certs/ca.crt
 	kubectl get secrets webhook-server-cert -n hnc-system -o jsonpath="{.data.tls\.crt}" | base64 --decode > /tmp/k8s-webhook-server/serving-certs/tls.crt
 	kubectl get secrets webhook-server-cert -n hnc-system -o jsonpath="{.data.tls\.key}" | base64 --decode > /tmp/k8s-webhook-server/serving-certs/tls.key
@@ -275,6 +276,24 @@ undeploy: manifests
 	@echo "Deleting the rest of HNC"
 	-kubectl delete -f manifests/default.yaml
 	@echo Please ignore any \'not found\' errors, these are expected.
+
+undeploy-dev: manifests
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "This will FULLY delete HNC, including all CRDs. You have 5s to turn back"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@sleep 5
+	@echo "Deleting all CRDs to ensure all finalizers are removed"
+	-kubectl delete -f manifests/crds.yaml
+	@echo "Deleting the rest of HNC"
+	-kubectl delete -f manifests/dev-cm.yaml
+	@echo Please ignore any \'not found\' errors, these are expected.
+	rm -rf /tmp/k8s-webhook-server/serving-certs/
 
 # Push the docker image
 docker-push: docker-build

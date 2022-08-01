@@ -120,6 +120,7 @@ func main() {
 	go startControllers(mgr, certsReady)
 
 	setupLog.Info("Starting manager")
+
 	if err := mgr.Start(ctrl.SetupSignalHandler()); err != nil {
 		setupLog.Error(err, "problem running manager")
 		os.Exit(1)
@@ -150,7 +151,7 @@ func parseFlags() {
 	flag.Var(&managedNamespaceLabels, "managed-namespace-label", "A regex indicating the labels on namespaces that are managed by HNC. These labels may only be set via the HierarchyConfiguration object. All regexes are implictly wrapped by \"^...$\". This argument can be specified multiple times. See the user guide for more information.")
 	flag.Var(&managedNamespaceAnnots, "managed-namespace-annotation", "A regex indicating the annotations on namespaces that are managed by HNC. These annotations may only be set via the HierarchyConfiguration object. All regexes are implictly wrapped by \"^...$\". This argument can be specified multiple times. See the user guide for more information.")
 	flag.BoolVar(&webhooksOnly, "webhooks-only", false, "Disables the controllers so HNC can be run in HA webhook mode")
-	flag.BoolVar(&enableHRQ, "enable-hrq", false, "Enables hierarchical resource quotas")
+	flag.BoolVar(&enableHRQ, "enable-hrq", true, "Enables hierarchical resource quotas")
 	flag.Parse()
 
 	// Assign the array args to the configuration variables after the args are parsed.
