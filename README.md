@@ -1,3 +1,6 @@
+# Running HNC with Devspace
+A guide cna be found [here](https://docs.google.com/document/d/1UrBfFTWHY4v0ZUVK_WHTNQjDVx9tQPerlKMlD2Abvj4/edit?usp=sharing)
+
 # The Hierarchical Namespace Controller (HNC)
 
 ```bash
