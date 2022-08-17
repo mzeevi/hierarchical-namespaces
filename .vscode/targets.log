@@ -1,0 +1,730 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-redhat-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Wed Aug 17 09:45:32 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# makefile (from 'Makefile', line 93)
+DIRS = ./api/... ./cmd/... ./internal/...
+# default
+.SHELLFLAGS := -c
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /root/.xauthaWClXk
+# automatic
+@F = $(notdir $@)
+# makefile (from 'Makefile', line 5)
+CONFIG = default
+# makefile (from 'Makefile', line 74)
+CURDIR = $(shell pwd)
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# environment
+LESSOPEN = ||/usr/bin/lesspipe.sh %s
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+HISTCONTROL = ignoredups
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+XDG_DATA_DIRS = /root/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+# environment
+DBUS_SESSION_BUS_ADDRESS = disabled:
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from 'Makefile', line 83)
+STATICCHECK = ${CURDIR}/bin/staticcheck
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /tmp/vscode-ipc-c20c9abc-a84a-40c8-bed0-481ea6249869.sock
+# environment
+VSCODE_CWD = /root
+# environment
+ 
+GOPROXY = https://proxy.golang.org,direct
+# environment
+GOMODCACHE = /root/go/pkg/mod
+# default
+MAKE_HOST := x86_64-redhat-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+# makefile (from 'Makefile', line 70)
+OS_NAME := linux
+# makefile (from 'Makefile', line 393)
+HNC_GCB_SUBS := _HNC_REGISTRY=gcr.io/k8s-staging-multitenancy,_HNC_IMG_NAME=hnc-manager,_HNC_IMG_TAG=latest,_HNC_USER=,_HNC_PERSONAL_ACCESS_TOKEN=,_HNC_RELEASE_ID=,_HNC_REPO_OWNER=kubernetes-sigs
+# environment
+GOPATH = /root/go
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# makefile (from 'Makefile', line 383)
+HNC_RELEASE_IMG = ${HNC_RELEASE_REGISTRY}/${HNC_IMG_NAME}:${HNC_IMG_TAG}
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# makefile (from 'Makefile', line 42)
+HNC_IMG_NAME = hnc-manager
+# makefile (from 'Makefile', line 81)
+CONTROLLER_GEN = ${CURDIR}/bin/controller-gen
+# environment
+LS_COLORS = rs=0:di=38;5;33:ln=38;5;51:mh=00:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=01;05;37;41:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;40:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.zst=38;5;9:*.tzst=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.wim=38;5;9:*.swm=38;5;9:*.dwm=38;5;9:*.esd=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.mjpg=38;5;13:*.mjpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.m4a=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.oga=38;5;45:*.opus=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+# automatic
+%F = $(notdir $%)
+# makefile (from 'Makefile', line 86)
+GOBIN = $(shell go env GOPATH)/bin
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/user/devspace-hnc/hierarchical-namespaces
+# default
+.LOADED := 
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /root
+# environment
+VSCODE_CLI = 1
+# makefile (from 'Makefile', line 382)
+HNC_RELEASE_REGISTRY = gcr.io/k8s-staging-multitenancy
+# environment
+VSCODE_CODE_CACHE_PATH = /root/vscode/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+# environment
+LOGNAME = root
+# environment
+TERM = xterm-256color
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+HOSTNAME = localhost.localdomain
+# environment
+MAKELEVEL := 0
+# environment
+SSH_ASKPASS = /usr/libexec/openssh/gnome-ssh-askpass
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 3
+# makefile (from 'Makefile', line 52)
+HNC_IMG_TAG = latest
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = root
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from 'Makefile', line 94)
+GOFMT_DIRS = $(DIRS:/...=)
+# makefile (from 'Makefile', line 433)
+ERR_MSG = Ensure that HNC_IMG_TAG (eg v0.1.0), HNC_USER (your Github username), HNC_PAT (Github personal access token) and HNC_RELEASE_ID (Github numeric ID) are set
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := make
+# makefile (from 'Makefile', line 75)
+KUSTOMIZE = ${CURDIR}/hack/kustomize-3.8.1
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# makefile (from 'Makefile', line 440)
+COULDNT_READ_RELEASE_IMG = $(shell gcloud container images describe $(HNC_RELEASE_IMG) > /dev/null 2>&1; echo $$?)
+# environment
+VSCODE_IPC_HOOK = /root/vscode/1.67.2-main.sock
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MAIL = /var/spool/mail/root
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# automatic
++F = $(notdir $+)
+# environment
+NO_AT_BRIDGE = 1
+# environment
+define BASH_FUNC_which%%
+() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+endef
+# makefile (from 'Makefile', line 13)
+KIND = ""
+# 'override' directive
+.SHELLSTATUS := 0
+# default
+MAKEFILES := 
+# makefile (from 'Makefile', line 66)
+HNC_IMG = ${HNC_IMG_NAME}:${HNC_IMG_TAG}
+# makefile (from 'Makefile', line 90)
+HNC_KREW_TAR_SHA256 = $(shell sha256sum bin/kubectl-hns.tar.gz | cut -d " " -f 1)
+# makefile (from 'Makefile', line 385)
+HNC_RELEASE_REPO_OWNER = kubernetes-sigs
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+HISTSIZE = 1000
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# makefile (from 'Makefile', line 25)
+PROJECT_ID := 
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+which_declare = declare -f
+# environment
+VSCODE_PID = 7527
+# variable set hash-table stats:
+# Load=102/1024=10%, Rehash=0, Collisions=24/196=12%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 66309, inode 203054227): 34 files, no impossibilities.
+
+# 34 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+krew-uninstall:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 481):
+	-kubectl krew uninstall hns
+
+test-smoke:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 355):
+	go clean --testcache
+	go test -v -timeout 0 ./test/e2e/... -args --ginkgo.focus "Quickstart"
+
+docker-push-multi: buildx-setup generate fmt vet staticcheck
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 296):
+	@echo "Warning: this does not run tests. Run 'make test' to ensure tests are passing."
+	docker buildx build \
+	--push \
+	--platform linux/arm64,linux/amd64,linux/arm/v7  --tag ${HNC_IMG} .
+
+krew-tar: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 472):
+	cp LICENSE bin/kubectl
+	tar -zcvf bin/kubectl-hns.tar.gz bin/kubectl
+
+staticcheck: build-staticcheck
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 206):
+	$(STATICCHECK) ${DIRS}
+
+kind-reset: kind-reboot
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 313):
+	@echo "If this didn't work, ensure you ran 'source devenv' to point kubectl at kind'"
+
+krew-install: krew-build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 477):
+	kubectl krew install --manifest=manifests/krew-kubectl-hns.yaml --archive=bin/kubectl-hns.tar.gz
+
+all: test docker-build
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+
+docker-build: generate fmt vet staticcheck
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 282):
+	@echo "Warning: this does not run tests. Run 'make test' to ensure tests are passing."
+	docker build . -t ${HNC_IMG}
+
+.PHONY: release test-e2e test-e2e-batch test-smoke
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+kind-reboot:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 305):
+	@echo "Warning: the 'kind' command must be in your path for this to work"
+	-kind delete cluster
+	kind create cluster --name ${KIND}
+
+test-e2e-batch: warn-hnc-repair
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 344):
+	number=1 ; while [[ $$number -le $N ]] ; do \
+		echo $$number ; \
+    ((number = number + 1)) ; \
+		go clean -testcache ; \
+		go test -v -timeout 0 ./test/e2e/... ; \
+	done
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
+
+deploy-ha: docker-push kubectl manifests
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 242):
+	-kubectl -n hnc-system delete deployment --all
+	kubectl apply -f manifests/ha.yaml
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+ 
+#  Last modified 2022-08-16 09:21:34.813191279
+#  File has been updated.
+#  Successfully updated.
+
+deploy-watch-ha:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 246):
+	kubectl logs -n hnc-system --follow deployment/hnc-controller-manager-ha manager
+
+kubectl: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 146):
+	cp bin/kubectl/kubectl-hns_$(OS_NAME)_amd64 $(GOBIN)/kubectl-hns
+
+test: build test-only
+#  Implicit rule search has been done.
+#  Last modified 2022-08-16 09:21:34.99619154
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+
+test-only:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 104):
+	@echo
+	@echo "If tests fail due to no matches for kind \"CustomResourceDefinition\" in version \"apiextensions.k8s.io/v1\","
+	@echo "please remove the old kubebuilder and reinstall it - https://book.kubebuilder.io/quick-start.html#installation"
+	@echo
+	go test ${DIRS} -coverprofile cover.out
+
+krew-build: krew-tar
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 464):
+	cp hack/krew-kubectl-hns.yaml manifests/krew-kubectl-hns.yaml
+	sed -i 's/HNC_KREW_TAR_SHA256/${HNC_KREW_TAR_SHA256}/' manifests/krew-kubectl-hns.yaml
+	sed -i 's/HNC_IMG_TAG/${HNC_IMG_TAG}/' manifests/krew-kubectl-hns.yaml
+	sed -i 's/HNC_RELEASE_REPO_OWNER/${HNC_RELEASE_REPO_OWNER}/' manifests/krew-kubectl-hns.yaml
+
+build: generate fmt vet staticcheck manifests
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+#  recipe to execute (from 'Makefile', line 112):
+	go build -o bin/manager ./cmd/manager/main.go
+	GOOS=linux GOARCH=amd64 go build \
+	     -o bin/kubectl/kubectl-hns_linux_amd64 \
+	     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=${HNC_IMG_TAG}" \
+	     ./cmd/kubectl/main.go
+	GOOS=darwin GOARCH=amd64 go build \
+	     -o bin/kubectl/kubectl-hns_darwin_amd64 \
+	     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=${HNC_IMG_TAG}" \
+	     ./cmd/kubectl/main.go
+	GOOS=darwin GOARCH=arm64 go build \
+	     -o bin/kubectl/kubectl-hns_darwin_arm64 \
+	     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=${HNC_IMG_TAG}" \
+	     ./cmd/kubectl/main.go
+	GOOS=linux GOARCH=arm64 go build \
+	     -o bin/kubectl/kubectl-hns_linux_arm64 \
+	     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=${HNC_IMG_TAG}" \
+	     ./cmd/kubectl/main.go
+	GOOS=linux GOARCH=arm go build \
+	     -o bin/kubectl/kubectl-hns_linux_arm \
+	     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=${HNC_IMG_TAG}" \
+	     ./cmd/kubectl/main.go
+	GOOS=windows GOARCH=amd64 go build \
+	     -o bin/kubectl/kubectl-hns_windows_amd64.exe \
+	     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=${HNC_IMG_TAG}" \
+	    ./cmd/kubectl/main.go
+
+vet:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 202):
+	go vet ${DIRS}
+
+check-fmt:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 196):
+	@if [ $(shell gofmt -l ${GOFMT_DIRS} | wc -l ) != 0 ]; then \
+		echo "Error: there are unformatted go code, please run 'make fmt' before committing" && exit 1; \
+	fi
+
+generate: controller-gen
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+#  recipe to execute (from 'Makefile', line 213):
+	$(CONTROLLER_GEN) object:headerFile=./hack/boilerplate.go.txt paths=./api/...
+
+undeploy: manifests
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 255):
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "This will FULLY delete HNC, including all CRDs. You have 5s to turn back"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@echo "********************************************************************************"
+	@sleep 5
+	@echo "Deleting all CRDs to ensure all finalizers are removed"
+	-kubectl delete -f manifests/crds.yaml
+	@echo "Deleting the rest of HNC"
+	-kubectl delete -f manifests/default.yaml
+	@echo Please ignore any \'not found\' errors, these are expected.
+
+manifests: controller-gen
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 164):
+	@echo "Building manifests with image ${HNC_IMG}"
+	@# See the comment above about the 'paths' arguments
+	$(CONTROLLER_GEN) crd rbac:roleName=manager-role webhook paths="./api/..." paths="./cmd/..." paths="./internal/..." output:crd:artifacts:config=config/crd/bases
+	./hack/crd_patches/singleton-enum-patch.sh
+	-rm -rf manifests/
+	mkdir manifests
+	@echo "Building CRD-only manifest"
+	cd manifests && \
+		touch kustomization.yaml && \
+		${KUSTOMIZE} edit add resource ../config/crd
+	${KUSTOMIZE} build manifests/ -o manifests/crds.yaml
+	@cd manifests && \
+		for variant in default-cc default-cm nowebhooks-cc ha-webhooks-cc hrq ; do \
+			echo "Building $${variant} manifest"; \
+			rm kustomization.yaml; \
+			touch kustomization.yaml && \
+			${KUSTOMIZE} edit add resource ../config/variants/$${variant} && \
+			${KUSTOMIZE} edit set image controller=${HNC_IMG}; \
+			${KUSTOMIZE} build . -o ./$${variant}.yaml; \
+		done
+	@echo "Creating alias and summary manifests"
+	@cp manifests/default-cc.yaml manifests/default.yaml
+	@cat manifests/nowebhooks-cc.yaml > manifests/ha.yaml
+	@echo "---" >> manifests/ha.yaml
+	@cat manifests/ha-webhooks-cc.yaml >> manifests/ha.yaml
+
+release: check-release-env
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 395):
+	@echo "*********************************************"
+	@echo "*********************************************"
+	@echo "Releasing ${HNC_RELEASE_IMG}"
+	@echo "... override with HNC_RELEASE_REGISTRY, HNC_IMG_NAME and"
+	@echo "... HNC_IMG_TAG."
+	@echo "Pulling from Github hierarchical-namespaces repo owned by ${HNC_RELEASE_REPO_OWNER}"
+	@echo "... override with HNC_RELEASE_REPO_OWNER"
+	@echo "GCP project: ${PROJECT_ID} (obtained from gcloud)"
+	@echo "Temporary build image (must be in ${PROJECT_ID}): ${HNC_IMG}"
+	@echo "Any existing images with the same tag will be overwritten!"
+	@echo ""
+	@echo "YOU HAVE FIVE SECONDS TO CANCEL"
+	@echo "*********************************************"
+	@echo "*********************************************"
+	@sleep 5
+	@echo
+	@echo "*********************************************"
+	@echo "*********************************************"
+	@echo "Starting build."
+	@echo "*********************************************"
+	@echo "*********************************************"
+	gcloud builds submit --config cloudbuild.yaml --no-source --substitutions=${HNC_GCB_SUBS} --timeout=60m
+	@echo "*********************************************"
+	@echo "*********************************************"
+	@echo "Pushing ${HNC_IMG} to ${HNC_RELEASE_IMG}"
+	@echo "*********************************************"
+	@echo "*********************************************"
+	@docker pull ${HNC_IMG}
+	@docker tag ${HNC_IMG} ${HNC_RELEASE_IMG}
+	@docker push ${HNC_RELEASE_IMG}
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+buildx-setup:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 287):
+	## This script needs to be run to start the emulator for multiarch builds
+	# This driver translates the instruction set to different platforms
+	docker run --rm --privileged linuxkit/binfmt:v0.8
+	docker buildx create --use --name=qemu
+	docker buildx inspect --bootstrap
+
+build-staticcheck:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 209):
+	go build -o $(STATICCHECK) honnef.co/go/tools/cmd/staticcheck
+
+run: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 150):
+	go run ./cmd/manager/main.go --novalidation
+
+test-e2e: warn-hnc-repair
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 333):
+	go clean -testcache
+	go test -v -timeout 0 ./test/e2e/...
+
+clean: krew-uninstall
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 140):
+	-rm -rf bin/*
+	-rm -rf manifests/*
+	-rm -f ${GOPATH}/bin/kubectl-hns
+
+deploy-hrq: docker-push kubectl manifests
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 249):
+	-kubectl -n hnc-system delete deployment --all
+	kubectl apply -f manifests/hrq.yaml
+
+kind-deploy:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 317):
+	CONFIG=kind $(MAKE) deploy
+
+warn-hnc-repair:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 359):
+	@echo "************************************************************"
+	@echo "HNC_REPAIR IS NOT SET. CRITICAL TESTS WILL BE SKIPPED."
+	@echo
+	@echo "If HNC is installed via an operator (e.g. GKE Hierarchy"
+	@echo "Controller), this is probably what you want to do. Otherwise,"
+	@echo "consider setting HNC_REPAIR to run the full set of tests."
+	@echo
+	@echo "You have 3s to hit Ctrl-C to cancel..."
+	@echo "************************************************************"
+	@echo
+	@sleep 3
+
+fmt:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 192):
+	gofmt -l -w ${GOFMT_DIRS}
+
+deploy: docker-push kubectl manifests
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 235):
+	-kubectl -n hnc-system delete deployment --all
+	kubectl apply -f manifests/default.yaml
+
+check-release-env:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 449):
+	$(error HNC_USER is undefined; ${ERR_MSG})
+	$(error HNC_PAT is undefined; ${ERR_MSG})
+	$(error HNC_RELEASE_ID is undefined; ${ERR_MSG})
+
+deploy-watch:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 239):
+	kubectl logs -n hnc-system --follow deployment/hnc-controller-manager manager
+
+# 'override' directive
+controller-gen: .SHELLSTATUS := 0
+controller-gen:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := controller-gen
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=9/32=28%, Rehash=0, Collisions=4/17=24%
+#  recipe to execute (from 'Makefile', line 223):
+	go build -o $(CONTROLLER_GEN) sigs.k8s.io/controller-tools/cmd/controller-gen
+
+docker-push: docker-build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 273):
+	@echo "Pushing ${HNC_IMG}"
+	docker push ${HNC_IMG}
+
+check-generate: generate
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 216):
+	@if [ $(shell git status --untracked-files=no --porcelain | wc -l ) != 0 ]; then \
+  		echo "Error: generated files are out of sync, please run 'make generate' before committing" && git diff && exit 1; \
+  	fi
+
+# files hash-table stats:
+# Load=43/1024=4%, Rehash=0, Collisions=2/125=2%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 76 / storage = 756 B / avg = 9 B
+ 
+# current buf: size = 8162 B / used = 756 B / count = 76 / avg = 9 B
+
+# strcache performance: lookups = 177 / hit rate = 57%
+# hash-table stats:
+# Load=76/8192=1%, Rehash=0, Collisions=2/177=1%
+# Finished Make data base on Wed Aug 17 09:45:32 2022
+
+ 

@@ -1,0 +1,10 @@
+{"level":"info","msg":"dev:app Waiting for pod to become ready...","time":"2022-08-17T11:07:29+03:00"}
+{"level":"info","msg":"dev:app Selected hnc-controller-manager-devspace-7858fd54b7-zzc2b:manager (pod:container)","time":"2022-08-17T11:07:31+03:00"}
+{"level":"info","msg":"dev:app ports Port forwarding started on: 2345 -\u003e 2345","time":"2022-08-17T11:07:32+03:00"}
+{"level":"info","msg":"dev:app ssh   Port forwarding started on: 11917 -\u003e 8022","time":"2022-08-17T11:07:32+03:00"}
+{"level":"info","msg":"dev:app sync  Sync started on: ./ \u003c-\u003e ./","time":"2022-08-17T11:07:33+03:00"}
+{"level":"info","msg":"dev:app sync  Waiting for initial sync to complete","time":"2022-08-17T11:07:33+03:00"}
+{"level":"info","msg":"dev:app proxy Port forwarding started on: 11227 \u003c- 10567","time":"2022-08-17T11:07:34+03:00"}
+{"level":"info","msg":"dev:app ssh   Use 'ssh app.hierarchical-namespaces.devspace' to connect via SSH","time":"2022-08-17T11:07:34+03:00"}
+{"level":"info","msg":"dev:app sync  Initial sync completed","time":"2022-08-17T11:07:53+03:00"}
+{"level":"info","msg":"dev:app term  Opening shell to manager:hnc-controller-manager-devspace-7858fd54b7-zzc2b (pod:container)","time":"2022-08-17T11:07:53+03:00"}

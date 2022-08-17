@@ -1,0 +1,67 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/user/devspace-hnc/hierarchical-namespaces'
+go build -o /home/user/devspace-hnc/hierarchical-namespaces/bin/controller-gen sigs.k8s.io/controller-tools/cmd/controller-gen
+/home/user/devspace-hnc/hierarchical-namespaces/bin/controller-gen object:headerFile=./hack/boilerplate.go.txt paths=./api/...
+gofmt -l -w ./api ./cmd ./internal
+go vet ./api/... ./cmd/... ./internal/...
+go build -o /home/user/devspace-hnc/hierarchical-namespaces/bin/staticcheck honnef.co/go/tools/cmd/staticcheck
+/home/user/devspace-hnc/hierarchical-namespaces/bin/staticcheck ./api/... ./cmd/... ./internal/...
+echo "Building manifests with image hnc-manager:latest"
+# See the comment above about the 'paths' arguments
+/home/user/devspace-hnc/hierarchical-namespaces/bin/controller-gen crd rbac:roleName=manager-role webhook paths="./api/..." paths="./cmd/..." paths="./internal/..." output:crd:artifacts:config=config/crd/bases
+./hack/crd_patches/singleton-enum-patch.sh
+rm -rf manifests/
+mkdir manifests
+echo "Building CRD-only manifest"
+cd manifests && \
+	touch kustomization.yaml && \
+	/home/user/devspace-hnc/hierarchical-namespaces/hack/kustomize-3.8.1 edit add resource ../config/crd
+/home/user/devspace-hnc/hierarchical-namespaces/hack/kustomize-3.8.1 build manifests/ -o manifests/crds.yaml
+cd manifests && \
+	for variant in default-cc default-cm nowebhooks-cc ha-webhooks-cc hrq ; do \
+		echo "Building ${variant} manifest"; \
+		rm kustomization.yaml; \
+		touch kustomization.yaml && \
+		/home/user/devspace-hnc/hierarchical-namespaces/hack/kustomize-3.8.1 edit add resource ../config/variants/${variant} && \
+		/home/user/devspace-hnc/hierarchical-namespaces/hack/kustomize-3.8.1 edit set image controller=hnc-manager:latest; \
+		/home/user/devspace-hnc/hierarchical-namespaces/hack/kustomize-3.8.1 build . -o ./${variant}.yaml; \
+	done
+echo "Creating alias and summary manifests"
+cp manifests/default-cc.yaml manifests/default.yaml
+cat manifests/nowebhooks-cc.yaml > manifests/ha.yaml
+echo "---" >> manifests/ha.yaml
+cat manifests/ha-webhooks-cc.yaml >> manifests/ha.yaml
+go build -o bin/manager ./cmd/manager/main.go
+GOOS=linux GOARCH=amd64 go build \
+     -o bin/kubectl/kubectl-hns_linux_amd64 \
+     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=latest" \
+     ./cmd/kubectl/main.go
+GOOS=darwin GOARCH=amd64 go build \
+     -o bin/kubectl/kubectl-hns_darwin_amd64 \
+     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=latest" \
+     ./cmd/kubectl/main.go
+GOOS=darwin GOARCH=arm64 go build \
+     -o bin/kubectl/kubectl-hns_darwin_arm64 \
+     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=latest" \
+     ./cmd/kubectl/main.go
+GOOS=linux GOARCH=arm64 go build \
+     -o bin/kubectl/kubectl-hns_linux_arm64 \
+     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=latest" \
+     ./cmd/kubectl/main.go
+GOOS=linux GOARCH=arm go build \
+     -o bin/kubectl/kubectl-hns_linux_arm \
+     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=latest" \
+     ./cmd/kubectl/main.go
+GOOS=windows GOARCH=amd64 go build \
+     -o bin/kubectl/kubectl-hns_windows_amd64.exe \
+     -ldflags="-X sigs.k8s.io/hierarchical-namespaces/internal/version.Version=latest" \
+    ./cmd/kubectl/main.go
+echo
+echo "If tests fail due to no matches for kind \"CustomResourceDefinition\" in version \"apiextensions.k8s.io/v1\","
+echo "please remove the old kubebuilder and reinstall it - https://book.kubebuilder.io/quick-start.html#installation"
+echo
+go test ./api/... ./cmd/... ./internal/... -coverprofile cover.out
+echo "Warning: this does not run tests. Run 'make test' to ensure tests are passing."
+docker build . -t hnc-manager:latest
+make: Leaving directory '/home/user/devspace-hnc/hierarchical-namespaces'
+ 

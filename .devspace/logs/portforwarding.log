@@ -1,0 +1,8 @@
+Forwarding from 127.0.0.1:2345 -> 2345
+Forwarding from [::1]:2345 -> 2345
+Forwarding from 127.0.0.1:11917 -> 8022
+Forwarding from [::1]:11917 -> 8022
+Handling connection for 2345
+Handling connection for 2345
+{"level":"error","msg":"an error occurred forwarding 2345 -\u003e 2345: error forwarding port 2345 to pod 9327d0cb62b1d5368f203d22da51a405835de7172c21fb0128c820a662638a1f, uid : failed to execute portforward in network namespace \"/var/run/netns/cni-6bfff967-7fa3-a5b9-f98a-104285a2f5cb\": failed to connect to localhost:2345 inside namespace \"9327d0cb62b1d5368f203d22da51a405835de7172c21fb0128c820a662638a1f\", IPv4: dial tcp4 127.0.0.1:2345: connect: connection refused IPv6 dial tcp6 [::1]:2345: connect: connection refused","time":"2022-08-17T11:20:06+03:00"}
+Handling connection for 2345

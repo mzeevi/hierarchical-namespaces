@@ -1,0 +1,30 @@
+{"level":"info","msg":"Inject devspacehelper...","time":"2022-08-17T11:07:32+03:00"}
+{"level":"info","msg":"Start syncing","time":"2022-08-17T11:07:33+03:00"}
+{"level":"info","msg":"Downstream - Initial sync completed","time":"2022-08-17T11:07:33+03:00"}
+{"level":"info","msg":"Upstream - Upload 5156 create change(s) (Uncompressed ~255959.27 KB)","time":"2022-08-17T11:07:35+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 5156 change(s)","time":"2022-08-17T11:07:51+03:00"}
+{"level":"info","msg":"Upstream - Initial sync completed","time":"2022-08-17T11:07:53+03:00"}
+{"level":"info","msg":"Upstream - Upload File 'internal/hierarchyconfig/reconciler.go'","time":"2022-08-17T11:19:43+03:00"}
+{"level":"info","msg":"Upstream - Upload 1 create change(s) (Uncompressed ~32.93 KB)","time":"2022-08-17T11:19:43+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 1 change(s)","time":"2022-08-17T11:19:44+03:00"}
+{"level":"info","msg":"Upstream - Upload File 'internal/hierarchyconfig/reconciler.go'","time":"2022-08-17T11:19:48+03:00"}
+{"level":"info","msg":"Upstream - Upload 1 create change(s) (Uncompressed ~32.92 KB)","time":"2022-08-17T11:19:48+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 1 change(s)","time":"2022-08-17T11:19:49+03:00"}
+{"level":"info","msg":"Upstream - Upload File 'cmd/manager/main.go'","time":"2022-08-17T11:20:01+03:00"}
+{"level":"info","msg":"Upstream - Upload 1 create change(s) (Uncompressed ~13.52 KB)","time":"2022-08-17T11:20:01+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 1 change(s)","time":"2022-08-17T11:20:01+03:00"}
+{"level":"info","msg":"Upstream - Upload File '.git/index.lock'","time":"2022-08-17T11:20:03+03:00"}
+{"level":"info","msg":"Upstream - Upload File '.git/index'","time":"2022-08-17T11:20:03+03:00"}
+{"level":"info","msg":"Upstream - Upload 2 create change(s) (Uncompressed ~650.87 KB)","time":"2022-08-17T11:20:03+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 1 change(s)","time":"2022-08-17T11:20:04+03:00"}
+{"level":"info","msg":"Upstream - Upload File 'cmd/manager/main.go'","time":"2022-08-17T11:20:30+03:00"}
+{"level":"info","msg":"Upstream - Upload 1 create change(s) (Uncompressed ~13.49 KB)","time":"2022-08-17T11:20:30+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 1 change(s)","time":"2022-08-17T11:20:30+03:00"}
+{"level":"info","msg":"Upstream - Upload File '.git/index'","time":"2022-08-17T11:20:32+03:00"}
+{"level":"info","msg":"Upstream - Upload 1 create change(s) (Uncompressed ~650.87 KB)","time":"2022-08-17T11:20:32+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 1 change(s)","time":"2022-08-17T11:20:32+03:00"}
+{"level":"info","msg":"Upstream - Upload 4 create change(s) (Uncompressed ~0.58 KB)","time":"2022-08-17T11:21:22+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 4 change(s)","time":"2022-08-17T11:21:22+03:00"}
+{"level":"info","msg":"Upstream - Upload File '.gitignore'","time":"2022-08-17T11:21:29+03:00"}
+{"level":"info","msg":"Upstream - Upload 1 create change(s) (Uncompressed ~0.45 KB)","time":"2022-08-17T11:21:29+03:00"}
+{"level":"info","msg":"Upstream - Successfully processed 1 change(s)","time":"2022-08-17T11:21:29+03:00"}
